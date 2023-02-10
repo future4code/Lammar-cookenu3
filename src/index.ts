@@ -1,6 +1,5 @@
-import { app } from './server';
+import { setup } from "./setup"
+import { config } from "dotenv";
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-    }
-);
+config();
+setup();

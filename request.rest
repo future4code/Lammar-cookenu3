@@ -1,0 +1,11 @@
+### add friend 
+POST http://localhost:3003/user/friend
+Content-Type: application/json
+
+{
+    "user_id": "2afbe1e8-c33c-4122-884b-4a9f0c11135b", 
+    "follower_id": "69a3ca5f-55a9-48cd-aeb2-d8764c5161f2"
+}
+
+### feed 
+GET http://localhost:3003/user/feed/69a3ca5f-55a9-48cd-aeb2-d8764c5161f2
