@@ -4,7 +4,7 @@ export type addFriend = {
     follower_id: string
 }
 
-export type post = {
+export type recipes = {
     id: string,
     title: string,
     description: string,

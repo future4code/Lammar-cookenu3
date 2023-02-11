@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node ./build/server.js",
-    "dev": "ts-node-dev src/index.ts",
+    "dev": "tsnd --respawn --transpile-only src/index.ts",
     "migrations": "tsc && node ./build/database/migrations.js"
   },
   "repository": {

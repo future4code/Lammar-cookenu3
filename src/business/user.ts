@@ -2,11 +2,12 @@ import { UserDatabase } from "../database/userDatabase";
 import { CustomError } from "../error/CustomError";
 import { FriendInputDTO } from "../models/inputsDTO";
 import { generateId } from "../services/idGenerator";
-import { addFriend, post } from "../models/types";
+import { addFriend, recipes } from "../models/types";
 
 const userDatabase = new UserDatabase();
 
 export class UserBusiness {
+
   public async addFriend(input: FriendInputDTO): Promise<void> {
     try {
       const { user_id, follower_id } = input;
@@ -29,7 +30,7 @@ export class UserBusiness {
     }
   }
 
-  public async getFeed(id: string): Promise<post[]> {
+  public async getFeed(id: string): Promise<recipes[]> {
     try {
       if (!id) {
         throw new CustomError(400, "Invalid parameters");
