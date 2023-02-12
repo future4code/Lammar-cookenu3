@@ -1,3 +1,18 @@
+### get Data user
+GET http://localhost:3003/user/getUserData
+Content-Type: application/json
+Authorization: 
+
+### create Recipe
+POST http://localhost:3003/user/createRecipe
+Content-Type: application/json
+
+{
+   "title": "Macarronada", 
+   "description": "Macarrão, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
+   "created_at": "12/02/2023" ,
+}
+
 ### add friend 
 POST http://localhost:3003/user/friend
 Content-Type: application/json
