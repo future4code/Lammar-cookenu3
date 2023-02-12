@@ -1,3 +1,4 @@
+import { UserInputDTO } from "./../models/inputsDTO";
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/user";
 import { VerifyFunctions } from "../function";
@@ -7,6 +8,36 @@ const userBusiness = new UserBusiness();
 const verifyFunctions = new VerifyFunctions();
 
 export class UserController {
+  public createRecipe = async (req: Request, res: Response) => {
+    try {
+      const { title, description, created_at } = req.body;
+
+      const input: UserInputDTO = {
+        title,
+        description,
+        created_at,
+      };
+
+      res.status(201).send(input);
+    } catch (error: any) {
+      res.status(400).send(error.message);
+    }
+  };
+  public getUserData = async (req: Request, res: Response) => {
+    try {
+      const token = req.headers.authorization as string;
+
+      const userBusiness = new UserBusiness();
+      const userData = await userBusiness.getUserData(token);
+
+      res
+        .status(201)
+        .send({ id: userData.id, name: userData.name, email: userData.email });
+    } catch (error: any) {
+      res.status(400).send(error.message);
+    }
+  };
+
   public async addFriend(req: Request, res: Response): Promise<void> {
     try {
       const input: FriendInputDTO = {
@@ -14,11 +45,11 @@ export class UserController {
         follower_id: req.body.follower_id,
       };
 
-      if(!input.user_id || !input.follower_id) {
+      if (!input.user_id || !input.follower_id) {
         throw new Error("Missing input");
       }
 
-      if(input.user_id === input.follower_id) {
+      if (input.user_id === input.follower_id) {
         throw new Error("You can't follow yourself");
       }
 

@@ -1,3 +1,7 @@
+import { recipe } from "./../models/types";
+import { UserInputDTO } from "./../models/inputsDTO";
+import { InvalidToken } from "./../error/CustomError";
+import { Authenticator } from "./../services/Authenticator";
 import { UserDatabase } from "../database/userDatabase";
 import { CustomError } from "../error/CustomError";
 import { FriendInputDTO } from "../models/inputsDTO";
@@ -5,8 +9,50 @@ import { generateId } from "../services/idGenerator";
 import { addFriend, recipes } from "../models/types";
 
 const userDatabase = new UserDatabase();
+const authenticator = new Authenticator();
 
 export class UserBusiness {
+  public createRecipe = async (input: UserInputDTO) => {
+    try {
+      const { title, description, created_at } = input;
+
+      if (!title || !description || !created_at) {
+        throw new CustomError(
+          400,
+          'Preencha os campos "name","descrição" e "data da criação"'
+        );
+      }
+      const id: string = generateId();
+
+      const recipe: recipe = {
+        id,
+        title,
+        description,
+        created_at,
+      };
+      const userDatabase = new UserDatabase();
+      await userDatabase.insertRecipe(recipe);
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
+
+  public getUserData = async (token: string) => {
+    try {
+      if (!token) {
+        throw new InvalidToken();
+      }
+
+      const { id } = authenticator.getTokenData(token);
+
+      const userDatabase = new UserDatabase();
+      const { name, email } = await userDatabase.findUser("id", id);
+
+      return { id, name, email };
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
 
   public async addFriend(input: FriendInputDTO): Promise<void> {
     try {
