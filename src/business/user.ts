@@ -1,6 +1,6 @@
-import { recipe } from "./../models/types";
-import { UserInputDTO } from "./../models/inputsDTO";
-import { InvalidToken } from "./../error/CustomError";
+import { recipe, user } from "./../models/types";
+import { LoginInputDTO, SignupInputDTO, UserInputDTO } from "./../models/inputsDTO";
+import { InvalidEmail, InvalidName, InvalidPassword, InvalidToken, UserNotFound } from "./../error/CustomError";
 import { Authenticator } from "./../services/Authenticator";
 import { UserDatabase } from "../database/userDatabase";
 import { CustomError } from "../error/CustomError";
@@ -10,8 +10,89 @@ import { addFriend, recipes } from "../models/types";
 
 const userDatabase = new UserDatabase();
 const authenticator = new Authenticator();
+const idGenerator = new IdGenerator(); 
 
 export class UserBusiness {
+
+  public signup= async (input: SignupInputDTO) => {
+    try {
+      const { name, email, password } = input;
+
+      if( !name || !email || !password) {
+        throw new CustomError(
+          400,
+          'Preencha os campos "Nome", "Email" e "Password"'
+        );
+      }
+
+      if (name.length < 4){
+        throw new InvalidName;
+      }
+
+      if (!email.includes("@")){
+        throw new InvalidEmail();
+      } 
+
+      if (password.length < 6){
+        throw new InvalidPassword();
+      }
+
+      const id: string = idGenerator.generateId();
+
+      const user: user = {
+        id,
+        name, 
+        email, 
+        password
+      };
+
+      const userDatabase = new UserDatabase();
+      await userDatabase.insertUser(user);
+
+      const token = authenticator.generateToken({ id })
+
+      return token 
+
+    } catch (error: any) {
+      throw new CustomError(400, error.message);     
+    }
+  }
+
+  public login = async (input: LoginInputDTO) => {
+    try {
+      const { email, password } = input;
+
+      if( !email || !password) {
+        throw new CustomError(
+          400,
+          'Preencha os campos "Email" e "Password"'
+        );
+      }
+      if (!email.includes("@")){
+        throw new InvalidEmail();
+      } 
+
+      const userDatabase = new UserDatabase();
+      const user = await userDatabase.findUserByEmail(email);
+
+      if(!user) {
+        throw new UserNotFound()
+      }
+
+      if(user.password !== password){
+        throw new InvalidPassword()
+      }
+
+      const token = authenticator.generateToken({ id: user.id })
+      
+      return token 
+
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+      
+    }
+  }
+
   public createRecipe = async (input: UserInputDTO) => {
     try {
       const { title, description, created_at } = input;
