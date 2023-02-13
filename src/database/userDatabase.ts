@@ -8,6 +8,33 @@ export class UserDatabase extends Database {
   private TABLE_RECIPES = "Recipes";
   private TABLE_FOLLOWERS = "Followers";
 
+  public findUserByEmail = async (email: string) => {
+    try {
+      const result = await UserDatabase.connection("Auth_users")
+      .select().where({email})
+
+      return result[0]
+
+        
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   public insertRecipe = async (recipe: recipe) => {
     try {
       await UserDatabase.connection

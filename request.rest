@@ -1,3 +1,13 @@
+
+### login
+POST http://localhost:3003/user/login 
+Content-Type: application/json
+
+{
+    "email": "julia@gmail.com",
+    "password": "123456"
+}
+
 ### get Data user
 GET http://localhost:3003/user/getUserData
 Content-Type: application/json

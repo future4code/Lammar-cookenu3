@@ -15,3 +15,22 @@ export class InvalidToken extends CustomError {
     super(401, "token inválido");
   }
 }
+
+export class InvalidEmail extends CustomError {
+  constructor() {
+    super(400, "Email Inválido");
+  }
+}
+
+export class UserNotFound    extends CustomError {
+  constructor() {
+    super(404, "Usuário não encontrado ");
+  }
+}
+
+export class InvalidPassword   extends CustomError {
+  constructor() {
+    super(401, "Password Incorreto");
+  }
+}
+

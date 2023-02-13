@@ -1,6 +1,6 @@
 import { recipe } from "./../models/types";
-import { UserInputDTO } from "./../models/inputsDTO";
-import { InvalidToken } from "./../error/CustomError";
+import { LoginInputDTO, UserInputDTO } from "./../models/inputsDTO";
+import { InvalidEmail, InvalidPassword, InvalidToken, UserNotFound } from "./../error/CustomError";
 import { Authenticator } from "./../services/Authenticator";
 import { UserDatabase } from "../database/userDatabase";
 import { CustomError } from "../error/CustomError";
@@ -12,6 +12,42 @@ const userDatabase = new UserDatabase();
 const authenticator = new Authenticator();
 
 export class UserBusiness {
+  public login = async (input: LoginInputDTO) => {
+    try {
+      const { email, password } = input;
+
+      if( !email || !password) {
+        throw new CustomError(
+          400,
+          'Preencha os campos "Email" e "Password"'
+        );
+      }
+      if (!email.includes("@")){
+        throw new InvalidEmail;
+      } 
+
+      const userDatabase = new UserDatabase();
+      const user = await userDatabase.findUserByEmail(email);
+
+      if(!user) {
+        throw new UserNotFound()
+      }
+
+      if(user.password !== password){
+        throw new InvalidPassword()
+      }
+
+      const token = authenticator.generateToken({ id: user.id })
+      
+      return token 
+
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+
+      
+    }
+  }
+
   public createRecipe = async (input: UserInputDTO) => {
     try {
       const { title, description, created_at } = input;
