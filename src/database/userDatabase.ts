@@ -1,4 +1,4 @@
-import { recipe } from "./../models/types";
+import { recipe, user } from "./../models/types";
 import { CustomError } from "../error/CustomError";
 import { Database } from "../connection/database";
 import { addFriend, recipes } from "../models/types";
@@ -8,9 +8,24 @@ export class UserDatabase extends Database {
   private TABLE_RECIPES = "Recipes";
   private TABLE_FOLLOWERS = "Followers";
 
+  public insertUser = async (user: user) => {
+    try {
+      await UserDatabase.connection
+        .insert({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          password: user.password,
+        })
+        .into("Users");
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
+
   public findUserByEmail = async (email: string) => {
     try {
-      const result = await UserDatabase.connection("Auth_users")
+      const result = await UserDatabase.connection("Users")
       .select().where({email})
 
       return result[0]
@@ -20,20 +35,6 @@ export class UserDatabase extends Database {
       throw new CustomError(400, error.message);
     }
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   public insertRecipe = async (recipe: recipe) => {
     try {

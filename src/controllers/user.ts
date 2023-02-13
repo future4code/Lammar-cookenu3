@@ -1,4 +1,4 @@
-import { LoginInputDTO, UserInputDTO } from "./../models/inputsDTO";
+import { LoginInputDTO, SignupInputDTO, UserInputDTO } from "./../models/inputsDTO";
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/user";
 import { VerifyFunctions } from "../function";
@@ -8,6 +8,26 @@ const userBusiness = new UserBusiness();
 const verifyFunctions = new VerifyFunctions();
 
 export class UserController {
+
+  public signup = async (req: Request, res: Response) => {
+    try {
+      const { name, email, password } = req.body;
+
+      const input: SignupInputDTO = {
+        name,
+        email,
+        password
+      };
+
+      const userBusiness = new UserBusiness()
+      const token = await userBusiness.signup(input);
+
+      res.status(200).send({message:"Usuário criado com sucesso!", token });
+      
+    } catch (error: any) {
+      res.status(400).send(error.message)      
+    }
+  };
 
   public login = async (req: Request, res: Response) => {
     try {
@@ -24,14 +44,9 @@ export class UserController {
       res.status(200).send({message: token });
       
     } catch (error: any) {
-      res.status(400).send(error.message)
-      
+      res.status(400).send(error.message)     
     }
-
-
-
-  }
-
+  };
 
   public createRecipe = async (req: Request, res: Response) => {
     try {
@@ -48,6 +63,7 @@ export class UserController {
       res.status(400).send(error.message);
     }
   };
+
   public getUserData = async (req: Request, res: Response) => {
     try {
       const token = req.headers.authorization as string;
@@ -90,7 +106,7 @@ export class UserController {
     } catch (error: any) {
       res.status(error.statusCode || 400).send({ message: error.message });
     }
-  }
+  };
 
   public async getFeed(req: Request, res: Response) {
     try {

@@ -1,3 +1,13 @@
+### signup
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Julia Marques",
+    "email": "julia@gmail.com",
+    "password": "123456"
+}
 
 ### login
 POST http://localhost:3003/user/login 
