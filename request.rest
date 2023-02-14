@@ -18,9 +18,9 @@ Content-Type: application/json
 }
 
 ### get Data user
-GET http://localhost:3003/user/getUserData
+GET http://localhost:3003/user/profile
 Content-Type: application/json
-Authorization: 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ3ZTgxYzY1LTgxNjgtNDZkMC1hZGM2LWZiMzk2ZTJjNTkzYiIsImlhdCI6MTY3NjQwNzAyOCwiZXhwIjoxNjc2NDEwNjI4fQ.nliWphWr7hQWWcNjHqYpu_LB_XsTh5nbaNXPtzp_TX0
 
 ### create Recipe
 POST http://localhost:3003/user/createRecipe

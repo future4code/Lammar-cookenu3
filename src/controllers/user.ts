@@ -1,4 +1,9 @@
-import { LoginInputDTO, SignupInputDTO, UserInputDTO } from "./../models/inputsDTO";
+import { Authenticator } from "./../services/Authenticator";
+import {
+  LoginInputDTO,
+  SignupInputDTO,
+  UserInputDTO,
+} from "./../models/inputsDTO";
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/user";
 import { VerifyFunctions } from "../function";
@@ -8,7 +13,6 @@ const userBusiness = new UserBusiness();
 const verifyFunctions = new VerifyFunctions();
 
 export class UserController {
-
   public signup = async (req: Request, res: Response) => {
     try {
       const { name, email, password } = req.body;
@@ -16,16 +20,15 @@ export class UserController {
       const input: SignupInputDTO = {
         name,
         email,
-        password
+        password,
       };
 
-      const userBusiness = new UserBusiness()
+      const userBusiness = new UserBusiness();
       const token = await userBusiness.signup(input);
 
-      res.status(200).send({message:"Usuário criado com sucesso!", token });
-      
+      res.status(200).send({ message: "Usuário criado com sucesso!", token });
     } catch (error: any) {
-      res.status(400).send(error.message)      
+      res.status(400).send(error.message);
     }
   };
 
@@ -35,16 +38,15 @@ export class UserController {
 
       const input: LoginInputDTO = {
         email,
-        password
+        password,
       };
 
-      const userBusiness = new UserBusiness()
+      const userBusiness = new UserBusiness();
       const token = await userBusiness.login(input);
 
-      res.status(200).send({message: token });
-      
+      res.status(200).send({ message: token });
     } catch (error: any) {
-      res.status(400).send(error.message)     
+      res.status(400).send(error.message);
     }
   };
 
@@ -64,21 +66,25 @@ export class UserController {
     }
   };
 
-  public getUserData = async (req: Request, res: Response) => {
+  public getUserById = async (req: Request, res: Response) => {
     try {
       const token = req.headers.authorization as string;
 
+      const tokenGenerator = new Authenticator();
+      const authenticationData = tokenGenerator.getTokenData(token);
       const userBusiness = new UserBusiness();
-      const userData = await userBusiness.getUserData(token);
+      const user = await userBusiness.getUserById(authenticationData.id);
 
-      res
-        .status(201)
-        .send({ id: userData.id, name: userData.name, email: userData.email });
-    } catch (error: any) {
-      res.status(400).send(error.message);
+      res.status(200).send({
+        id: user.id,
+        email: user.email,
+      });
+    } catch (err: any) {
+      res.status(400).send({
+        message: err.message,
+      });
     }
   };
-
   public async addFriend(req: Request, res: Response): Promise<void> {
     try {
       const input: FriendInputDTO = {
@@ -106,7 +112,7 @@ export class UserController {
     } catch (error: any) {
       res.status(error.statusCode || 400).send({ message: error.message });
     }
-  };
+  }
 
   public async getFeed(req: Request, res: Response) {
     try {

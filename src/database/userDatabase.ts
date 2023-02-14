@@ -26,11 +26,10 @@ export class UserDatabase extends Database {
   public findUserByEmail = async (email: string) => {
     try {
       const result = await UserDatabase.connection("Users")
-      .select().where({email})
+        .select()
+        .where({ email });
 
-      return result[0]
-
-        
+      return result[0];
     } catch (error: any) {
       throw new CustomError(400, error.message);
     }
@@ -50,16 +49,13 @@ export class UserDatabase extends Database {
     }
   };
 
-  public findUser = async (user: string, data: string) => {
-    try {
-      const result = await UserDatabase.connection("Users")
-        .select()
-        .where(user, data);
+  public getUserById = async (id: string): Promise<any> => {
+    const result = await UserDatabase.connection
+      .select("*")
+      .from("Users")
+      .where({ id });
 
-      return result[0];
-    } catch (error: any) {
-      throw new CustomError(400, error.message);
-    }
+    return result[0];
   };
 
   public addFriend = async (friends: addFriend): Promise<void> => {
