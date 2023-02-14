@@ -5,7 +5,7 @@ import { Authenticator } from "./../services/Authenticator";
 import { UserDatabase } from "../database/userDatabase";
 import { CustomError } from "../error/CustomError";
 import { FriendInputDTO } from "../models/inputsDTO";
-import { generateId } from "../services/idGenerator";
+import {  IdGenerator } from "../services/idGenerator";
 import { addFriend, recipes } from "../models/types";
 
 const userDatabase = new UserDatabase();
@@ -103,7 +103,7 @@ export class UserBusiness {
           'Preencha os campos "name","descrição" e "data da criação"'
         );
       }
-      const id: string = generateId();
+      const id: string =  idGenerator.generateId();
 
       const recipe: recipe = {
         id,
@@ -143,7 +143,7 @@ export class UserBusiness {
         throw new CustomError(400, "Invalid parameters");
       }
 
-      const id: string = generateId();
+      const id: string =  idGenerator.generateId();
 
       const addFriend: addFriend = {
         id,
