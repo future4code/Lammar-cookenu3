@@ -100,10 +100,10 @@ export class UserBusiness {
     try {
       const { title, description, created_at, user_id } = input;
 
-      if (!title || !description || !created_at || user_id) {
+      if (!title || !description || !created_at || !user_id) {
         throw new CustomError(
           400,
-          'Preencha os campos "name","descrição" e "data da criação"'
+          'Preencha os campos "name","descrição", "data da criação e id do usuário"'
         );
       }
       const id: string = idGenerator.generateId();
@@ -113,7 +113,7 @@ export class UserBusiness {
         title,
         description,
         created_at,
-        user_id
+        user_id,
       };
       const userDatabase = new UserDatabase();
       await userDatabase.insertRecipe(recipe);
