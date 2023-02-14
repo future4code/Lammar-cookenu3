@@ -98,9 +98,9 @@ export class UserBusiness {
 
   public createRecipe = async (input: UserInputDTO) => {
     try {
-      const { title, description, created_at } = input;
+      const { title, description, created_at, user_id } = input;
 
-      if (!title || !description || !created_at) {
+      if (!title || !description || !created_at || user_id) {
         throw new CustomError(
           400,
           'Preencha os campos "name","descrição" e "data da criação"'
@@ -113,6 +113,7 @@ export class UserBusiness {
         title,
         description,
         created_at,
+        user_id
       };
       const userDatabase = new UserDatabase();
       await userDatabase.insertRecipe(recipe);

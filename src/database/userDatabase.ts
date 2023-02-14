@@ -42,6 +42,7 @@ export class UserDatabase extends Database {
           title: recipe.title,
           description: recipe.description,
           created_at: recipe.created_at,
+          user_id: recipe.user_id,
         })
         .into("Recipes");
     } catch (error: any) {

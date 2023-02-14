@@ -17,6 +17,7 @@ export type recipe = {
   title: string;
   description: string;
   created_at: string;
+  user_id: string;
 };
 export type user = {
   id: string;

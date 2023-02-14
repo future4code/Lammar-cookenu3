@@ -52,12 +52,13 @@ export class UserController {
 
   public createRecipe = async (req: Request, res: Response) => {
     try {
-      const { title, description, created_at } = req.body;
+      const { title, description, created_at, user_id } = req.body;
 
       const input: UserInputDTO = {
         title,
         description,
         created_at,
+        user_id
       };
 
       res.status(201).send(input);
