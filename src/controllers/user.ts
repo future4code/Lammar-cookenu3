@@ -77,6 +77,7 @@ export class UserController {
 
       res.status(200).send({
         id: user.id,
+        name: user.name,
         email: user.email,
       });
     } catch (err: any) {
