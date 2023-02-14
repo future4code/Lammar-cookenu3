@@ -3,8 +3,8 @@ POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
-    "name": "Julia Marques",
-    "email": "julia@gmail.com",
+    "name": "Julia Marques 2",
+    "email": "julia2@gmail.com",
     "password": "123456"
 }
 
@@ -13,14 +13,14 @@ POST http://localhost:3003/user/login
 Content-Type: application/json
 
 {
-    "email": "julia@gmail.com",
+    "email": "julia2@gmail.com",
     "password": "123456"
 }
 
 ### get Data user
-GET http://localhost:3003/user/getUserData
+GET http://localhost:3003/user/profile
 Content-Type: application/json
-Authorization: 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljNjE5MWUyLTk2ZjEtNDc2Ni1iNmRhLWI2YmVjNDllZjQ4MSIsImlhdCI6MTY3NjQxMjAzOCwiZXhwIjoxNjc2NDE1NjM4fQ.yXbn43pUvY5mJwmtiiYtaNPYhPj8m3iXGFYk6bv2e4w
 
 ### create Recipe
 POST http://localhost:3003/user/createRecipe
@@ -29,7 +29,8 @@ Content-Type: application/json
 {
    "title": "Macarronada", 
    "description": "Macarrão, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
-   "created_at": "12/02/2023" ,
+   "created_at": "12/02/2023",
+   "user_id": "9c6191e2-96f1-4766-b6da-b6bec49ef481"
 }
 
 ### add friend 

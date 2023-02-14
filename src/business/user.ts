@@ -1,39 +1,48 @@
 import { recipe, user } from "./../models/types";
-import { LoginInputDTO, SignupInputDTO, UserInputDTO } from "./../models/inputsDTO";
-import { InvalidEmail, InvalidName, InvalidPassword, InvalidToken, UserNotFound } from "./../error/CustomError";
+import {
+  LoginInputDTO,
+  SignupInputDTO,
+  UserInputDTO,
+} from "./../models/inputsDTO";
+import {
+  InvalidEmail,
+  InvalidName,
+  InvalidPassword,
+  InvalidToken,
+  UserNotFound,
+} from "./../error/CustomError";
 import { Authenticator } from "./../services/Authenticator";
 import { UserDatabase } from "../database/userDatabase";
 import { CustomError } from "../error/CustomError";
 import { FriendInputDTO } from "../models/inputsDTO";
-import {  IdGenerator } from "../services/idGenerator";
+import { IdGenerator } from "../services/idGenerator";
 import { addFriend, recipes } from "../models/types";
 
 const userDatabase = new UserDatabase();
 const authenticator = new Authenticator();
-const idGenerator = new IdGenerator(); 
+const idGenerator = new IdGenerator();
 
 export class UserBusiness {
-
-  public signup= async (input: SignupInputDTO) => {
+  public signup = async (input: SignupInputDTO) => {
     try {
       const { name, email, password } = input;
 
-      if( !name || !email || !password) {
+      if (!name || !email || !password) {
         throw new CustomError(
           400,
           'Preencha os campos "Nome", "Email" e "Password"'
         );
       }
 
-      if (name.length < 4){
-        throw new InvalidName;
+      if (name.length < 4) {
+        throw new InvalidName();
       }
 
-      if (!email.includes("@")){
+      if (!email.includes("@")) {
         throw new InvalidEmail();
-      } 
+      }
 
-      if (password.length < 6){
+      if (password.length < 6) {
         throw new InvalidPassword();
       }
 
@@ -41,75 +50,70 @@ export class UserBusiness {
 
       const user: user = {
         id,
-        name, 
-        email, 
-        password
+        name,
+        email,
+        password,
       };
 
       const userDatabase = new UserDatabase();
       await userDatabase.insertUser(user);
 
-      const token = authenticator.generateToken({ id })
+      const token = authenticator.generateToken({ id });
 
-      return token 
-
+      return token;
     } catch (error: any) {
-      throw new CustomError(400, error.message);     
+      throw new CustomError(400, error.message);
     }
-  }
+  };
 
   public login = async (input: LoginInputDTO) => {
     try {
       const { email, password } = input;
 
-      if( !email || !password) {
-        throw new CustomError(
-          400,
-          'Preencha os campos "Email" e "Password"'
-        );
+      if (!email || !password) {
+        throw new CustomError(400, 'Preencha os campos "Email" e "Password"');
       }
-      if (!email.includes("@")){
+      if (!email.includes("@")) {
         throw new InvalidEmail();
-      } 
+      }
 
       const userDatabase = new UserDatabase();
       const user = await userDatabase.findUserByEmail(email);
 
-      if(!user) {
-        throw new UserNotFound()
+      if (!user) {
+        throw new UserNotFound();
       }
 
-      if(user.password !== password){
-        throw new InvalidPassword()
+      if (user.password !== password) {
+        throw new InvalidPassword();
       }
 
-      const token = authenticator.generateToken({ id: user.id })
-      
-      return token 
+      const token = authenticator.generateToken({ id: user.id });
 
+      return token;
     } catch (error: any) {
       throw new CustomError(400, error.message);
-      
     }
-  }
+  };
 
   public createRecipe = async (input: UserInputDTO) => {
     try {
-      const { title, description, created_at } = input;
+      const { title, description, created_at, user_id } = input;
 
-      if (!title || !description || !created_at) {
+      if (!title || !description || !created_at || !user_id) {
         throw new CustomError(
           400,
-          'Preencha os campos "name","descrição" e "data da criação"'
+          'Preencha os campos "name","descrição", "data da criação e id do usuário"'
         );
       }
-      const id: string =  idGenerator.generateId();
+      const id: string = idGenerator.generateId();
 
       const recipe: recipe = {
         id,
         title,
         description,
         created_at,
+        user_id,
       };
       const userDatabase = new UserDatabase();
       await userDatabase.insertRecipe(recipe);
@@ -118,20 +122,13 @@ export class UserBusiness {
     }
   };
 
-  public getUserData = async (token: string) => {
+  public getUserById = async (token: string) => {
     try {
-      if (!token) {
-        throw new InvalidToken();
-      }
-
-      const { id } = authenticator.getTokenData(token);
-
       const userDatabase = new UserDatabase();
-      const { name, email } = await userDatabase.findUser("id", id);
-
-      return { id, name, email };
-    } catch (error: any) {
-      throw new CustomError(400, error.message);
+      const user = await userDatabase.getUserById(token);
+      return user;
+    } catch (err: any) {
+      throw new Error(err.message);
     }
   };
 
@@ -143,7 +140,7 @@ export class UserBusiness {
         throw new CustomError(400, "Invalid parameters");
       }
 
-      const id: string =  idGenerator.generateId();
+      const id: string = idGenerator.generateId();
 
       const addFriend: addFriend = {
         id,
