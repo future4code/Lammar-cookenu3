@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node ./build/server.js",
+    "start": "tsc && node ./build/index.js",
     "dev": "tsnd --respawn --transpile-only src/index.ts",
     "migrations": "tsc && node ./build/database/migrations.js"
   },
