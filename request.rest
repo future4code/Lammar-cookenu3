@@ -1,5 +1,5 @@
 ### signup
-POST http://localhost:3003/user/signup
+POST https://projeto-cookenu.onrender.com/user/signup
 Content-Type: application/json
 
 {
@@ -9,7 +9,7 @@ Content-Type: application/json
 }
 
 ### login
-POST http://localhost:3003/user/login 
+POST https://projeto-cookenu.onrender.com/user/login 
 Content-Type: application/json
 
 {
@@ -18,12 +18,12 @@ Content-Type: application/json
 }
 
 ### get Data user
-GET http://localhost:3003/user/profile
+GET https://projeto-cookenu.onrender.com/user/profile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljNjE5MWUyLTk2ZjEtNDc2Ni1iNmRhLWI2YmVjNDllZjQ4MSIsImlhdCI6MTY3NjQxMjAzOCwiZXhwIjoxNjc2NDE1NjM4fQ.yXbn43pUvY5mJwmtiiYtaNPYhPj8m3iXGFYk6bv2e4w
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmMDMyOTFkLTk3ZDItNGQ2Ny1iMTM5LTU1YTFlNTE2ZTY1OCIsImlhdCI6MTY3NjgzNDIxMywiZXhwIjoxNjc2ODM3ODEzfQ.2ZENUIzc7ImmS4o6u55HF1Y8zTXwPQM05LQLKk7G7Lo
 
 ### create Recipe
-POST http://localhost:3003/user/createRecipe
+POST https://projeto-cookenu.onrender.com/user/createRecipe
 Content-Type: application/json
 
 {
@@ -34,7 +34,7 @@ Content-Type: application/json
 }
 
 ### add friend 
-POST http://localhost:3003/user/friend
+POST https://projeto-cookenu.onrender.com/user/friend
 Content-Type: application/json
 
 {
@@ -43,4 +43,4 @@ Content-Type: application/json
 }
 
 ### feed 
-GET http://localhost:3003/user/feed/69a3ca5f-55a9-48cd-aeb2-d8764c5161f2
+GET https://projeto-cookenu.onrender.com/user/feed/69a3ca5f-55a9-48cd-aeb2-d8764c5161f2
