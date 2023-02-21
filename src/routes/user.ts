@@ -9,5 +9,6 @@ userRouter.post("/signup", userController.signup);
 userRouter.post("/login", userController.login);
 userRouter.get("/profile", userController.getUserById);
 userRouter.post("/createRecipe", userController.createRecipe);
-userRouter.post("/friend", userController.addFriend);
-userRouter.get("/feed/:id", userController.getFeed);
+userRouter.post("/follow", userController.addFriend);
+userRouter.get("/feed", userController.getFeed);
+userRouter.get("/:id", userController.getUserData);

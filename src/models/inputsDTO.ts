@@ -17,6 +17,5 @@ export interface LoginInputDTO {
 }
 
 export interface FriendInputDTO {
-  user_id: string;
   follower_id: string;
 }

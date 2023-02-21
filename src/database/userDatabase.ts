@@ -50,7 +50,7 @@ export class UserDatabase extends Database {
     }
   };
 
-  public getUserById = async (id: string): Promise<any> => {
+  public getUserById = async (id: string): Promise<user> => {
     const result = await UserDatabase.connection
       .select("*")
       .from("Users")
@@ -65,7 +65,7 @@ export class UserDatabase extends Database {
         .insert({
           id: friends.id,
           user_id: friends.user_id,
-          follower_id: friends.follower_id,
+          follower_id: friends.userToFollowId,
         })
         .into(this.TABLE_FOLLOWERS);
     } catch (error: any) {
@@ -75,7 +75,8 @@ export class UserDatabase extends Database {
 
   public getFeed = async (id: string): Promise<recipes[]> => {
     try {
-      const result = await Database.connection(this.TABLE_FOLLOWERS)
+      const result = await Database.connection
+      (this.TABLE_FOLLOWERS)
         .where(this.TABLE_FOLLOWERS + ".follower_id", id)
         .join(
           this.TABLE_USERS,
@@ -103,4 +104,5 @@ export class UserDatabase extends Database {
       throw new CustomError(error.statusCode, error.message);
     }
   };
+
 }

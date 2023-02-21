@@ -1,7 +1,7 @@
 export type addFriend = {
   id: string;
   user_id: string;
-  follower_id: string;
+  userToFollowId: string;
 };
 
 export type recipes = {
@@ -10,6 +10,7 @@ export type recipes = {
   description: string;
   created_at: string;
   user_id: string;
+  name: string;
 };
 
 export type recipe = {
@@ -18,6 +19,7 @@ export type recipe = {
   description: string;
   created_at: string;
   user_id: string;
+  name: string;
 };
 export type user = {
   id: string;
