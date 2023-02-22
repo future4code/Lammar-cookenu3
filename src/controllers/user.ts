@@ -1,12 +1,11 @@
 import { Authenticator } from "./../services/Authenticator";
 import {
   LoginInputDTO,
+  RecipeInputDTO,
   SignupInputDTO,
-  UserInputDTO,
 } from "./../models/inputsDTO";
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/user";
-import { FriendInputDTO } from "../models/inputsDTO";
 import { VerifyFunctions } from "../function";
 import { recipe } from "../models/types";
 
@@ -52,16 +51,17 @@ export class UserController {
 
   public createRecipe = async (req: Request, res: Response) => {
     try {
-      const { title, description, created_at, user_id } = req.body;
+      const { title, description, user_id } = req.body;
 
-      const input: UserInputDTO = {
+      const input: RecipeInputDTO = {
         title,
         description,
-        created_at,
-        user_id
+        user_id,
       };
 
-      res.status(201).send(input);
+      await userBusiness.createRecipe(input);
+
+      res.status(201).send({ message: "Recipe created successfully", input });
     } catch (error: any) {
       res.status(400).send(error.message);
     }
@@ -121,24 +121,7 @@ export class UserController {
         throw new Error("No recipes Found");
       }
 
-      //modificar data que vem do banco para o formato dd/mm/yyyy
-      
-
-
-      const recipes = result.map((recipe: recipe) => {
-        return {
-          id: recipe.id,
-          title: recipe.title,
-          description: recipe.description,
-           //modificar data que vem do banco para o formato dd/mm/yyyy
-          createdAt: recipe.created_at,
-
-          userId: recipe.user_id,
-          userName: recipe.name,
-        };
-      });
-
-      res.status(200).json({"Recipes:" : recipes});
+      res.status(200).json({"Recipes:" : result});
 
     } catch (error: any) {
       res.status(error.statusCode || 404).send({ message: error.message });

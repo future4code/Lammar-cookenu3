@@ -1,9 +1,8 @@
-import { AuthenticationData, recipe, user } from "./../models/types";
+import { user } from "./../models/types";
 import {
-  FriendInputDTO,
   LoginInputDTO,
+  RecipeInputDTO,
   SignupInputDTO,
-  UserInputDTO,
 } from "./../models/inputsDTO";
 import {
   InvalidEmail,
@@ -95,25 +94,25 @@ export class UserBusiness {
     }
   };
 
-  public createRecipe = async (input: UserInputDTO) => {
+  public createRecipe = async (input: RecipeInputDTO) => {
     try {
-      const { title, description, created_at, user_id } = input;
+      const { title, description, user_id } = input;
 
-      if (!title || !description || !created_at || !user_id) {
+      if (!title || !description || !user_id) {
         throw new CustomError(
           400,
           'Preencha os campos "name","descrição", "data da criação e id do usuário"'
         );
       }
+
       const id: string = idGenerator.generateId();
 
-      const recipe: recipe = {
+      const recipe: recipes = {
         id,
         title,
         description,
-        created_at,
-        user_id,
-        name: "",
+        created_at: new Date(),
+        user_id: user_id,
       };
       const userDatabase = new UserDatabase();
       await userDatabase.insertRecipe(recipe);

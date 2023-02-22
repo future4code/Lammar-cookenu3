@@ -18,7 +18,7 @@ export class VerifyFunctions extends Database {
 
             const result2 = await Database.connection
             .select("*")
-            .from("Followers")
+            .from("Users")
             .where({id: input.follower_id})
 
             if(result2.length === 0) {

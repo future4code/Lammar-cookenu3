@@ -8,18 +8,17 @@ export type recipes = {
   id: string;
   title: string;
   description: string;
-  created_at: string;
+  created_at: Date;
   user_id: string;
-  name: string;
 };
 
 export type recipe = {
   id: string;
   title: string;
   description: string;
-  created_at: string;
-  user_id: string;
-  name: string;
+  createdAt: Date;
+  userId: string;
+  userName: string;
 };
 export type user = {
   id: string;

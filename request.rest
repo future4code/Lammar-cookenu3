@@ -34,7 +34,7 @@ Content-Type: application/json
 {
    "title": "Macarronada", 
    "description": "Macarrão, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
-   "user_id": "9c6191e2-96f1-4766-b6da-b6bec49ef481"
+   "user_id": "ad2b733a-29da-49c6-b41a-42322bdcd184"
 }
 
 ### add friend 
@@ -43,10 +43,10 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzAxODc4MywiZXhwIjoxNjc3MTA1MTgzfQ.Rjyu7slQKBTRatrjYDgV3JjU0HqyJ241F8YRVnG1L0M
 
 {
-    "userToFollowId": "b7a0aaf2-37e5-4642-ade0-08e0f558b41f"
+    "userToFollowId": "ad2b733a-29da-49c6-b41a-42322bdcd184"
 }
 
 ### get feed 
 GET http://localhost:3003/user/feed
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzAxODc4MywiZXhwIjoxNjc3MTA1MTgzfQ.Rjyu7slQKBTRatrjYDgV3JjU0HqyJ241F8YRVnG1L0M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzEwNzM3NiwiZXhwIjoxNjc3MTkzNzc2fQ.Qa4KXapw5XigElcnEiiJbhT38F5A-KoacPh7b1zw6g4
 
