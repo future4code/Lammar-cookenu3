@@ -1,5 +1,5 @@
 ### signup
-POST https://projeto-cookenu.onrender.com/user/signup
+POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
@@ -9,38 +9,44 @@ Content-Type: application/json
 }
 
 ### login
-POST https://projeto-cookenu.onrender.com/user/login 
+POST http://localhost:3003/user/login 
 Content-Type: application/json
 
 {
-    "email": "julia2@gmail.com",
-    "password": "123456"
+    "email": "santiago@gmail.com",
+    "password": "$2b$10"
 }
 
 ### get Data user
-GET https://projeto-cookenu.onrender.com/user/profile
+GET http://localhost:3003/user/profile
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzAxNTE2MCwiZXhwIjoxNjc3MDE4NzYwfQ.HmHOYYuhgbnpNGkDXFm0zzzO_wVAvna_jITOJ47d248
+
+### get Data user by id
+GET http://localhost:3003/user/69a3ca5f-55a9-48cd-aeb2-d8764c5161f2
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmMDMyOTFkLTk3ZDItNGQ2Ny1iMTM5LTU1YTFlNTE2ZTY1OCIsImlhdCI6MTY3NjgzNDIxMywiZXhwIjoxNjc2ODM3ODEzfQ.2ZENUIzc7ImmS4o6u55HF1Y8zTXwPQM05LQLKk7G7Lo
 
 ### create Recipe
-POST https://projeto-cookenu.onrender.com/user/createRecipe
+POST http://localhost:3003/user/createRecipe
 Content-Type: application/json
 
 {
    "title": "Macarronada", 
    "description": "Macarrão, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
-   "created_at": "12/02/2023",
-   "user_id": "9c6191e2-96f1-4766-b6da-b6bec49ef481"
+   "user_id": "ad2b733a-29da-49c6-b41a-42322bdcd184"
 }
 
 ### add friend 
-POST https://projeto-cookenu.onrender.com/user/friend
+POST http://localhost:3003/user/follow
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzAxODc4MywiZXhwIjoxNjc3MTA1MTgzfQ.Rjyu7slQKBTRatrjYDgV3JjU0HqyJ241F8YRVnG1L0M
 
 {
-    "user_id": "2afbe1e8-c33c-4122-884b-4a9f0c11135b", 
-    "follower_id": "69a3ca5f-55a9-48cd-aeb2-d8764c5161f2"
+    "userToFollowId": "ad2b733a-29da-49c6-b41a-42322bdcd184"
 }
 
-### feed 
-GET https://projeto-cookenu.onrender.com/user/feed/69a3ca5f-55a9-48cd-aeb2-d8764c5161f2
+### get feed 
+GET http://localhost:3003/user/feed
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzEwNzM3NiwiZXhwIjoxNjc3MTkzNzc2fQ.Qa4KXapw5XigElcnEiiJbhT38F5A-KoacPh7b1zw6g4
+

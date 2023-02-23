@@ -1,7 +1,13 @@
 export interface UserInputDTO {
   title: string;
   description: string;
-  created_at: string;
+  created_at?: string;
+  user_id: string;
+}
+
+export interface RecipeInputDTO {
+  title: string;
+  description: string;
   user_id: string;
 }
 
@@ -17,6 +23,5 @@ export interface LoginInputDTO {
 }
 
 export interface FriendInputDTO {
-  user_id: string;
   follower_id: string;
 }

@@ -5,32 +5,24 @@ import { Database } from "./connection/database";
 
 export class VerifyFunctions extends Database {
     
-    public checkFriend = async (input: FriendInputDTO): Promise<Boolean> => {
+    public verifyFriendship = async (input: FriendInputDTO): Promise<Boolean> => {
         try {
             const result = await Database.connection
             .select("*")
             .from("Followers")
-            .where({user_id: input.user_id, follower_id: input.follower_id})
+            .where({follower_id: input.follower_id})
 
             if(result.length > 0) {
                 throw new CustomError(400, "Friendship already exists");
             }
-            return true;
-        } catch (error: any) {
-            throw new CustomError(error.statusCode, error.message);
-        }
-    }
 
-    
-    public verifyUser = async (id: string): Promise<Boolean> => {
-        try {
-            const result = await Database.connection
+            const result2 = await Database.connection
             .select("*")
             .from("Users")
-            .where({id})
+            .where({id: input.follower_id})
 
-            if(result.length === 0) {
-                throw new CustomError(404, "User not found");
+            if(result2.length === 0) {
+                throw new CustomError(400, "User not found");
             }
 
             return true;
@@ -38,5 +30,4 @@ export class VerifyFunctions extends Database {
             throw new CustomError(error.statusCode, error.message);
         }
     }
-    
 }
