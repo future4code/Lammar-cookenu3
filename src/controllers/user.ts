@@ -1,5 +1,6 @@
 import { Authenticator } from "./../services/Authenticator";
 import {
+  EditRecipeInputDTO,
   LoginInputDTO,
   SignupInputDTO,
   UserInputDTO,
@@ -58,10 +59,29 @@ export class UserController {
         title,
         description,
         created_at,
-        user_id
+        user_id,
       };
 
       res.status(201).send(input);
+    } catch (error: any) {
+      res.status(400).send(error.message);
+    }
+  };
+
+  public editRecipe = async (req: Request, res: Response) => {
+    try {
+      const input: EditRecipeInputDTO = {
+        title: req.body.title,
+        description: req.body.description,
+        created_at: req.body.created_at,
+        user_id: req.body.user_id,
+        id: req.params.id,
+        token: req.headers.authorization as string,
+      };
+      const userBusiness = new UserBusiness();
+      await userBusiness.editUser(input);
+
+      res.status(201).send({ message: "Receita editada!" });
     } catch (error: any) {
       res.status(400).send(error.message);
     }

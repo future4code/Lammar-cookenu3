@@ -1,5 +1,7 @@
 import { recipe, user } from "./../models/types";
 import {
+  EditRecipeInput,
+  EditRecipeInputDTO,
   LoginInputDTO,
   SignupInputDTO,
   UserInputDTO,
@@ -117,6 +119,32 @@ export class UserBusiness {
       };
       const userDatabase = new UserDatabase();
       await userDatabase.insertRecipe(recipe);
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
+
+  public editUser = async (input: EditRecipeInputDTO) => {
+    try {
+      const { title, description, created_at, user_id, id, token } = input;
+
+      if (!title || !description || !created_at || !user_id || !id || !token) {
+        throw new CustomError(
+          400,
+          'Preencha os campos "título", "descrição", "data da criação", id do usuário, id e "token"'
+        );
+      }
+
+      const editRecipeInput: EditRecipeInput = {
+        title,
+        description,
+        created_at,
+        user_id,
+        id,
+      };
+
+      const userDatabase = new UserDatabase();
+      await userDatabase.editUser(editRecipeInput);
     } catch (error: any) {
       throw new CustomError(400, error.message);
     }

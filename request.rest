@@ -20,7 +20,7 @@ Content-Type: application/json
 ### get Data user
 GET http://localhost:3003/user/profile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljNjE5MWUyLTk2ZjEtNDc2Ni1iNmRhLWI2YmVjNDllZjQ4MSIsImlhdCI6MTY3NjQxMjAzOCwiZXhwIjoxNjc2NDE1NjM4fQ.yXbn43pUvY5mJwmtiiYtaNPYhPj8m3iXGFYk6bv2e4w
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzMjlmODY5LTliOWUtNGFhYy1iNjU5LWE4ZjAwZDYzYTg0NSIsImlhdCI6MTY3NzE5MDY0NywiZXhwIjoxNjc3MTk0MjQ3fQ.-L4hKNtFENpOSYssNXy7jqgg0tgHScR5rE2IHvDsQmg
 
 ### create Recipe
 POST http://localhost:3003/user/createRecipe
@@ -31,6 +31,18 @@ Content-Type: application/json
    "description": "Macarrão, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
    "created_at": "12/02/2023",
    "user_id": "9c6191e2-96f1-4766-b6da-b6bec49ef481"
+}
+
+### edit recipe
+PUT http://localhost:3003/user/edit/20bd6989-35f6-46a0-9ee5-caddc4e1b4c0
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzMjlmODY5LTliOWUtNGFhYy1iNjU5LWE4ZjAwZDYzYTg0NSIsImlhdCI6MTY3NzE5MDY0NywiZXhwIjoxNjc3MTk0MjQ3fQ.-L4hKNtFENpOSYssNXy7jqgg0tgHScR5rE2IHvDsQmg
+
+{
+   "title": "Macarronada com azeitona", 
+   "description": "Macarrão, muita azeitona, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
+   "created_at": "23/02/2023",
+   "user_id": "52cccfeb-eeae-4901-96c0-99aeedf4f839"
 }
 
 ### add friend 

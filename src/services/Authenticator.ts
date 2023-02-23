@@ -16,7 +16,7 @@ export class Authenticator {
         token,
         process.env.JWT_KEY as string
       ) as AuthenticationData;
-      return payload;
+      return { id: payload.id as string };
     } catch (error: any) {
       console.log(error.message);
       throw new Unauthorized();
