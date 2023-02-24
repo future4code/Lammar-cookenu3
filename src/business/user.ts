@@ -14,7 +14,7 @@ import { Authenticator } from "./../services/Authenticator";
 import { UserDatabase } from "../database/userDatabase";
 import { CustomError } from "../error/CustomError";
 import { IdGenerator } from "../services/idGenerator";
-import { addFriend, recipes } from "../models/types";
+import { addFriend, recipes, recipe } from "../models/types";
 
 const userDatabase = new UserDatabase();
 const authenticator = new Authenticator();
@@ -132,6 +132,25 @@ export class UserBusiness {
       };
 
       return userwithoutPassword;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  };
+
+  public getRecipeById = async (token: string) => {
+    try {
+      const recipes = await userDatabase.getRecipeById(token);
+
+      const recipeWithoutToken = {
+        id: recipes.id,
+        title: recipes.title,
+        description: recipes.description,
+        created_at: recipes.created_at
+
+        
+      };
+
+      return recipeWithoutToken ;
     } catch (err: any) {
       throw new Error(err.message);
     }

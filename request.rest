@@ -3,8 +3,8 @@ POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
-    "name": "Julia Marques 2",
-    "email": "julia2@gmail.com",
+    "name": "Julia Marques 3",
+    "email": "julia3@gmail.com",
     "password": "123456"
 }
 
@@ -13,7 +13,7 @@ POST http://localhost:3003/user/login
 Content-Type: application/json
 
 {
-    "email": "santiago@gmail.com",
+    "email": "julia@gmail.com",
     "password": "$2b$10"
 }
 
@@ -27,6 +27,7 @@ GET http://localhost:3003/user/69a3ca5f-55a9-48cd-aeb2-d8764c5161f2
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmMDMyOTFkLTk3ZDItNGQ2Ny1iMTM5LTU1YTFlNTE2ZTY1OCIsImlhdCI6MTY3NjgzNDIxMywiZXhwIjoxNjc2ODM3ODEzfQ.2ZENUIzc7ImmS4o6u55HF1Y8zTXwPQM05LQLKk7G7Lo
 
+
 ### create Recipe
 POST http://localhost:3003/user/createRecipe
 Content-Type: application/json
@@ -36,6 +37,11 @@ Content-Type: application/json
    "description": "Macarrão, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
    "user_id": "ad2b733a-29da-49c6-b41a-42322bdcd184"
 }
+
+### get recipe by id
+GET http://localhost:3003/recipe/1d87e872-fdb9-44e6-bf49-a62c4640f1a3
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmMDMyOTFkLTk3ZDItNGQ2Ny1iMTM5LTU1YTFlNTE2ZTY1OCIsImlhdCI6MTY3NjgzNDIxMywiZXhwIjoxNjc2ODM3ODEzfQ.2ZENUIzc7ImmS4o6u55HF1Y8zTXwPQM05LQLKk7G7Lo
 
 ### add friend 
 POST http://localhost:3003/user/follow
