@@ -8,7 +8,6 @@ import {
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/user";
 import { VerifyFunctions } from "../function";
-import { recipes } from "../models/types";
 
 const userBusiness = new UserBusiness();
 const authenticator = new Authenticator();
@@ -78,7 +77,7 @@ export class UserController {
         id: req.params.id,
         token: req.headers.authorization as string,
       };
-      const userBusiness = new UserBusiness();
+      
       await userBusiness.editUser(input);
 
       res.status(201).send({ message: "Receita editada!" });
@@ -109,15 +108,14 @@ export class UserController {
   public getRecipeById = async (req: Request, res: Response) => {
     try {
       const token = req.headers.authorization as string;
-      const authenticationData = authenticator.getTokenData(token);
+      authenticator.getTokenData(token);
 
-      const recipes = await userBusiness.getRecipeById(authenticationData.id);
-
+      const recipes = await userBusiness.getRecipeById(req.params.id);
       res.status(200).send({
         id: recipes.id,
         title: recipes.title,
         description: recipes.description,
-        created_at: recipes.created_at
+        createdAt: recipes.created_at
       });
 
     } catch (err: any) {

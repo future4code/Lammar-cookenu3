@@ -1,6 +1,3 @@
--- Active: 1674167890905@@35.226.146.116@3306@jbl-4417044-santiago-oliveira
-
-
 # table users
 CREATE TABLE Users (
     id VARCHAR(255) PRIMARY KEY,
@@ -26,7 +23,3 @@ CREATE TABLE Followers (
     follower_id VARCHAR(255) NOT NULL,
     FOREIGN KEY (follower_id) REFERENCES Users(id)
 );
-
-drop tables Users;
-drop tables Recipes;
-drop tables Followers;
