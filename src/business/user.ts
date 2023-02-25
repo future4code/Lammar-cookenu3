@@ -16,7 +16,7 @@ import { Authenticator } from "./../services/Authenticator";
 import { UserDatabase } from "../database/userDatabase";
 import { CustomError } from "../error/CustomError";
 import { IdGenerator } from "../services/idGenerator";
-import { addFriend, recipes, recipe } from "../models/types";
+import { addFriend, recipes } from "../models/types";
 
 const userDatabase = new UserDatabase();
 const authenticator = new Authenticator();
@@ -55,7 +55,6 @@ export class UserBusiness {
         password,
       };
 
-      const userDatabase = new UserDatabase();
       await userDatabase.insertUser(user);
 
       const token = authenticator.generateToken({ id });
@@ -77,7 +76,6 @@ export class UserBusiness {
         throw new InvalidEmail();
       }
 
-      const userDatabase = new UserDatabase();
       const user = await userDatabase.findUserByEmail(email);
 
       if (!user) {
@@ -116,7 +114,7 @@ export class UserBusiness {
         created_at: new Date(),
         user_id: user_id,
       };
-      const userDatabase = new UserDatabase();
+
       await userDatabase.insertRecipe(recipe);
     } catch (error: any) {
       throw new CustomError(400, error.message);
@@ -142,7 +140,6 @@ export class UserBusiness {
         id,
       };
 
-      const userDatabase = new UserDatabase();
       await userDatabase.editUser(editRecipeInput);
     } catch (error: any) {
       throw new CustomError(400, error.message);
@@ -174,8 +171,6 @@ export class UserBusiness {
         title: recipes.title,
         description: recipes.description,
         created_at: recipes.created_at
-
-        
       };
 
       return recipeWithoutToken ;

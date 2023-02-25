@@ -1,34 +1,34 @@
 ### signup
-POST http://localhost:3003/user/signup
+POST https://projeto-cookenu.onrender.com/user/signup
 Content-Type: application/json
 
 {
-    "name": "Julia Marques 3",
-    "email": "julia3@gmail.com",
+    "name": "Julia Marques",
+    "email": "julia@gmail.com",
     "password": "123456"
 }
 
 ### login
-POST http://localhost:3003/user/login 
+POST https://projeto-cookenu.onrender.com/user/login 
 Content-Type: application/json
 
 {
-    "email": "julia3@gmail.com",
-    "password": "123456"
+    "email": "santiago@gmail.com",
+    "password": "$2b$10"
 }
 
 ### get Data user
-GET http://localhost:3003/user/profile
+GET https://projeto-cookenu.onrender.com/user/profile
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTQzNSwiZXhwIjoxNjc3NDExODM1fQ.MJUvTpwaZwBlnPBTT-4Wl1zUxtJAswX5Yyv3e4AKPwA
 
 ### get Data user by id
-GET http://localhost:3003/user/2f81d88d-e9f3-421b-8966-6d415f2e0fbe
+GET https://projeto-cookenu.onrender.com/user/2f81d88d-e9f3-421b-8966-6d415f2e0fbe
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTQzNSwiZXhwIjoxNjc3NDExODM1fQ.MJUvTpwaZwBlnPBTT-4Wl1zUxtJAswX5Yyv3e4AKPwA
 
 ### create Recipe
-POST http://localhost:3003/user/createRecipe
+POST https://projeto-cookenu.onrender.com/user/createRecipe
 Content-Type: application/json
 
 {
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 
 ### edit recipe
-PUT http://localhost:3003/user/edit/2f81d88d-e9f3-421b-8966-6d415f2e0fbe
+PUT https://projeto-cookenu.onrender.com/user/edit/2f81d88d-e9f3-421b-8966-6d415f2e0fbe
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTA4NywiZXhwIjoxNjc3NDExNDg3fQ.lk-4cxAcar_YsAGreSdSZST3galwPRhXna3QCPvXwoI
 
@@ -50,12 +50,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMt
 }
 
 ### get recipe by id
-GET http://localhost:3003/recipe/52cccfeb-eeae-4901-96c0-99aeedf4f839
+GET https://projeto-cookenu.onrender.com/user/recipe/1d87e872-fdb9-44e6-bf49-a62c4640f1a3
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTA4NywiZXhwIjoxNjc3NDExNDg3fQ.lk-4cxAcar_YsAGreSdSZST3galwPRhXna3QCPvXwoI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM3NzA5NTkyLTFjMzMtNDYyZi04ZDFiLWExMjA2Y2RiZjU1NiIsImlhdCI6MTY3NzMzMjc0MywiZXhwIjoxNjc3NDE5MTQzfQ.s4ROozF-mktvPjr1cRrwijuL4Ldd73OhGVymQBAzLTA
 
 ### add friend 
-POST http://localhost:3003/user/follow
+POST https://projeto-cookenu.onrender.com/user/follow
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzAxODc4MywiZXhwIjoxNjc3MTA1MTgzfQ.Rjyu7slQKBTRatrjYDgV3JjU0HqyJ241F8YRVnG1L0M
 
@@ -64,7 +64,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTkt
 }
 
 ### get feed 
-GET http://localhost:3003/user/feed
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTA4NywiZXhwIjoxNjc3NDExNDg3fQ.lk-4cxAcar_YsAGreSdSZST3galwPRhXna3QCPvXwoI
+GET https://projeto-cookenu.onrender.com/user/feed
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzMzMjkzNywiZXhwIjoxNjc3NDE5MzM3fQ.XAg_Qmjy0W9GUj1JL12hRaRD2q0YaRjJBtPrKVBuhFc
 
 
