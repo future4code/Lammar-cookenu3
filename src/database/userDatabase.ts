@@ -2,6 +2,7 @@ import { recipe, user } from "./../models/types";
 import { CustomError } from "../error/CustomError";
 import { Database } from "../connection/database";
 import { addFriend, recipes } from "../models/types";
+import { EditRecipeInput } from "../models/inputsDTO";
 
 export class UserDatabase extends Database {
   private TABLE_USERS = "Users";
@@ -51,7 +52,23 @@ export class UserDatabase extends Database {
     }
   };
 
-  public getUserById = async (id: string): Promise<user> => {
+  public editUser = async (recipe: EditRecipeInput) => {
+    try {
+      await UserDatabase.connection
+        .update({
+          title: recipe.title,
+          description: recipe.description,
+          created_at: recipe.created_at,
+          user_id: recipe.user_id,
+        })
+        .where({ id: recipe.id })
+        .into("Recipes");
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
+
+  public getUserById = async (id: string): Promise<any> => {
     const result = await UserDatabase.connection
       .select("*")
       .from("Users")

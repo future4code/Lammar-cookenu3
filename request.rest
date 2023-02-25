@@ -13,20 +13,19 @@ POST http://localhost:3003/user/login
 Content-Type: application/json
 
 {
-    "email": "julia@gmail.com",
-    "password": "$2b$10"
+    "email": "julia3@gmail.com",
+    "password": "123456"
 }
 
 ### get Data user
 GET http://localhost:3003/user/profile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzAxNTE2MCwiZXhwIjoxNjc3MDE4NzYwfQ.HmHOYYuhgbnpNGkDXFm0zzzO_wVAvna_jITOJ47d248
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTQzNSwiZXhwIjoxNjc3NDExODM1fQ.MJUvTpwaZwBlnPBTT-4Wl1zUxtJAswX5Yyv3e4AKPwA
 
 ### get Data user by id
-GET http://localhost:3003/user/69a3ca5f-55a9-48cd-aeb2-d8764c5161f2
+GET http://localhost:3003/user/2f81d88d-e9f3-421b-8966-6d415f2e0fbe
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmMDMyOTFkLTk3ZDItNGQ2Ny1iMTM5LTU1YTFlNTE2ZTY1OCIsImlhdCI6MTY3NjgzNDIxMywiZXhwIjoxNjc2ODM3ODEzfQ.2ZENUIzc7ImmS4o6u55HF1Y8zTXwPQM05LQLKk7G7Lo
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTQzNSwiZXhwIjoxNjc3NDExODM1fQ.MJUvTpwaZwBlnPBTT-4Wl1zUxtJAswX5Yyv3e4AKPwA
 
 ### create Recipe
 POST http://localhost:3003/user/createRecipe
@@ -35,13 +34,25 @@ Content-Type: application/json
 {
    "title": "Macarronada", 
    "description": "Macarrão, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
-   "user_id": "ad2b733a-29da-49c6-b41a-42322bdcd184"
+   "user_id": "2f81d88d-e9f3-421b-8966-6d415f2e0fbe"
+}
+
+### edit recipe
+PUT http://localhost:3003/user/edit/2f81d88d-e9f3-421b-8966-6d415f2e0fbe
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTA4NywiZXhwIjoxNjc3NDExNDg3fQ.lk-4cxAcar_YsAGreSdSZST3galwPRhXna3QCPvXwoI
+
+{
+   "title": "Macarronada com azeitona", 
+   "description": "Macarrão, muita azeitona, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
+   "created_at": "23/02/2023",
+   "user_id": "52cccfeb-eeae-4901-96c0-99aeedf4f839"
 }
 
 ### get recipe by id
-GET http://localhost:3003/recipe/1d87e872-fdb9-44e6-bf49-a62c4640f1a3
+GET http://localhost:3003/recipe/52cccfeb-eeae-4901-96c0-99aeedf4f839
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmMDMyOTFkLTk3ZDItNGQ2Ny1iMTM5LTU1YTFlNTE2ZTY1OCIsImlhdCI6MTY3NjgzNDIxMywiZXhwIjoxNjc2ODM3ODEzfQ.2ZENUIzc7ImmS4o6u55HF1Y8zTXwPQM05LQLKk7G7Lo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTA4NywiZXhwIjoxNjc3NDExNDg3fQ.lk-4cxAcar_YsAGreSdSZST3galwPRhXna3QCPvXwoI
 
 ### add friend 
 POST http://localhost:3003/user/follow
@@ -54,5 +65,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTkt
 
 ### get feed 
 GET http://localhost:3003/user/feed
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzEwNzM3NiwiZXhwIjoxNjc3MTkzNzc2fQ.Qa4KXapw5XigElcnEiiJbhT38F5A-KoacPh7b1zw6g4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTA4NywiZXhwIjoxNjc3NDExNDg3fQ.lk-4cxAcar_YsAGreSdSZST3galwPRhXna3QCPvXwoI
+
 
