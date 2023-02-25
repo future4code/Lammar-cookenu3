@@ -32,14 +32,13 @@ O projeto consiste em criarmos uma rede social, na qual os usuários podem divid
 <h2>
     <br>
     <p style="color: #D30404; font-weight: bold;">🔗 Link do Deploy</p> 
-   
+    https://projeto-cookenu.onrender.com
 </h2>
 
 <h2>
     <br>
     <p style="color: #D30404; font-weight: bold;">🔗 Link da Documentação</p>
-    
-
+    https://documenter.getpostman.com/view/22369915/2s93CHvFM9
 </h2>
 
 <h2>

@@ -5,7 +5,7 @@ import { AuthenticationData } from "./../models/types";
 export class Authenticator {
   public generateToken = ({ id }: AuthenticationData): string => {
     const token = jwt.sign({ id }, process.env.JWT_KEY as string, {
-      expiresIn: "1h",
+      expiresIn: "1d",
     });
     return token;
   };

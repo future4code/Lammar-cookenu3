@@ -36,10 +36,11 @@ export class UserDatabase extends Database {
     }
   };
 
-  public insertRecipe = async (recipe: recipe) => {
+  public insertRecipe = async (recipe: recipes) => {
     try {
       await UserDatabase.connection
         .insert({
+          id: recipe.id,
           title: recipe.title,
           description: recipe.description,
           created_at: recipe.created_at,
@@ -76,13 +77,22 @@ export class UserDatabase extends Database {
     return result[0];
   };
 
+  public getRecipeById = async (id: string): Promise<recipes> => {
+    const result = await UserDatabase.connection
+      .select("*")
+      .from("Recipes")
+      .where({ id });
+
+    return result[0];
+  };
+
   public addFriend = async (friends: addFriend): Promise<void> => {
     try {
       await Database.connection
         .insert({
           id: friends.id,
           user_id: friends.user_id,
-          follower_id: friends.follower_id,
+          follower_id: friends.userToFollowId,
         })
         .into(this.TABLE_FOLLOWERS);
     } catch (error: any) {
@@ -92,32 +102,18 @@ export class UserDatabase extends Database {
 
   public getFeed = async (id: string): Promise<recipes[]> => {
     try {
-      const result = await Database.connection(this.TABLE_FOLLOWERS)
-        .where(this.TABLE_FOLLOWERS + ".follower_id", id)
-        .join(
-          this.TABLE_USERS,
-          this.TABLE_USERS + ".id",
-          "=",
-          this.TABLE_FOLLOWERS + ".user_id"
-        )
-        .join(
-          this.TABLE_RECIPES,
-          this.TABLE_RECIPES + ".user_id",
-          "=",
-          this.TABLE_USERS + ".id"
-        )
-        .select(
-          this.TABLE_RECIPES + ".id",
-          this.TABLE_RECIPES + ".title",
-          this.TABLE_RECIPES + ".description",
-          this.TABLE_RECIPES + ".created_at",
-          this.TABLE_RECIPES + ".user_id",
-          this.TABLE_USERS + ".name"
-        )
-        .orderBy(this.TABLE_RECIPES + ".created_at", "desc");
-      return result;
+      const result = await Database.connection.raw(`
+      SELECT Recipes.id, Recipes.title, Recipes.description, DATE_FORMAT (Recipes.created_at, '%d/%m/%Y') AS createdAt, Recipes.user_id AS userId, Users.name AS userName
+      FROM Recipes 
+      JOIN Followers ON Recipes.user_id = Followers.follower_id
+      JOIN Users ON Users.id = Followers.follower_id
+      WHERE Followers.user_id = '${id}'
+      ORDER BY Recipes.created_at DESC
+      `);
+      return result[0];
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
   };
+
 }

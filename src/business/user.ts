@@ -1,24 +1,22 @@
-import { recipe, user } from "./../models/types";
+import { user } from "./../models/types";
 import {
   EditRecipeInput,
   EditRecipeInputDTO,
   LoginInputDTO,
+  RecipeInputDTO,
   SignupInputDTO,
-  UserInputDTO,
 } from "./../models/inputsDTO";
 import {
   InvalidEmail,
   InvalidName,
   InvalidPassword,
-  InvalidToken,
   UserNotFound,
 } from "./../error/CustomError";
 import { Authenticator } from "./../services/Authenticator";
 import { UserDatabase } from "../database/userDatabase";
 import { CustomError } from "../error/CustomError";
-import { FriendInputDTO } from "../models/inputsDTO";
 import { IdGenerator } from "../services/idGenerator";
-import { addFriend, recipes } from "../models/types";
+import { addFriend, recipes, recipe } from "../models/types";
 
 const userDatabase = new UserDatabase();
 const authenticator = new Authenticator();
@@ -98,24 +96,25 @@ export class UserBusiness {
     }
   };
 
-  public createRecipe = async (input: UserInputDTO) => {
+  public createRecipe = async (input: RecipeInputDTO) => {
     try {
-      const { title, description, created_at, user_id } = input;
+      const { title, description, user_id } = input;
 
-      if (!title || !description || !created_at || !user_id) {
+      if (!title || !description || !user_id) {
         throw new CustomError(
           400,
           'Preencha os campos "name","descrição", "data da criação e id do usuário"'
         );
       }
+
       const id: string = idGenerator.generateId();
 
-      const recipe: recipe = {
+      const recipe: recipes = {
         id,
         title,
         description,
-        created_at,
-        user_id,
+        created_at: new Date(),
+        user_id: user_id,
       };
       const userDatabase = new UserDatabase();
       await userDatabase.insertRecipe(recipe);
@@ -152,28 +151,46 @@ export class UserBusiness {
 
   public getUserById = async (token: string) => {
     try {
-      const userDatabase = new UserDatabase();
       const user = await userDatabase.getUserById(token);
-      return user;
+
+      const userwithoutPassword = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      };
+
+      return userwithoutPassword;
     } catch (err: any) {
       throw new Error(err.message);
     }
   };
 
-  public async addFriend(input: FriendInputDTO): Promise<void> {
+  public getRecipeById = async (token: string) => {
     try {
-      const { user_id, follower_id } = input;
+      const recipes = await userDatabase.getRecipeById(token);
 
-      if (!user_id || !follower_id) {
-        throw new CustomError(400, "Invalid parameters");
-      }
+      const recipeWithoutToken = {
+        id: recipes.id,
+        title: recipes.title,
+        description: recipes.description,
+        created_at: recipes.created_at
 
-      const id: string = idGenerator.generateId();
+        
+      };
+
+      return recipeWithoutToken ;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  };
+
+  public async addFriend(input: string, inputToken: string): Promise<void> {
+    try {
 
       const addFriend: addFriend = {
-        id,
-        user_id,
-        follower_id,
+        id: idGenerator.generateId(),
+        user_id: input,
+        userToFollowId: inputToken,
       };
 
       await userDatabase.addFriend(addFriend);
@@ -182,19 +199,12 @@ export class UserBusiness {
     }
   }
 
-  public async getFeed(id: string): Promise<recipes[]> {
+  public async getFeed(inputToken: string): Promise<recipes[]> {
     try {
-      if (!id) {
-        throw new CustomError(400, "Invalid parameters");
-      }
-
-      if (id.length !== 36) {
-        throw new CustomError(400, "Invalid id");
-      }
-
-      return await userDatabase.getFeed(id);
+      return await userDatabase.getFeed(inputToken);
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
   }
 }
+

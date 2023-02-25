@@ -3,8 +3,8 @@ POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
-    "name": "Julia Marques 2",
-    "email": "julia2@gmail.com",
+    "name": "Julia Marques 3",
+    "email": "julia3@gmail.com",
     "password": "123456"
 }
 
@@ -13,14 +13,19 @@ POST http://localhost:3003/user/login
 Content-Type: application/json
 
 {
-    "email": "julia2@gmail.com",
+    "email": "julia3@gmail.com",
     "password": "123456"
 }
 
 ### get Data user
 GET http://localhost:3003/user/profile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzMjlmODY5LTliOWUtNGFhYy1iNjU5LWE4ZjAwZDYzYTg0NSIsImlhdCI6MTY3NzE5MDY0NywiZXhwIjoxNjc3MTk0MjQ3fQ.-L4hKNtFENpOSYssNXy7jqgg0tgHScR5rE2IHvDsQmg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTQzNSwiZXhwIjoxNjc3NDExODM1fQ.MJUvTpwaZwBlnPBTT-4Wl1zUxtJAswX5Yyv3e4AKPwA
+
+### get Data user by id
+GET http://localhost:3003/user/2f81d88d-e9f3-421b-8966-6d415f2e0fbe
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTQzNSwiZXhwIjoxNjc3NDExODM1fQ.MJUvTpwaZwBlnPBTT-4Wl1zUxtJAswX5Yyv3e4AKPwA
 
 ### create Recipe
 POST http://localhost:3003/user/createRecipe
@@ -29,14 +34,13 @@ Content-Type: application/json
 {
    "title": "Macarronada", 
    "description": "Macarrão, Oléo, Molho, Sal. Modo de Preparo: Ferve água, adicione o macarrão, prepare o molho, coloque o sal, misture o molho no macarrão e sirva-se!", 
-   "created_at": "12/02/2023",
-   "user_id": "9c6191e2-96f1-4766-b6da-b6bec49ef481"
+   "user_id": "2f81d88d-e9f3-421b-8966-6d415f2e0fbe"
 }
 
 ### edit recipe
-PUT http://localhost:3003/user/edit/20bd6989-35f6-46a0-9ee5-caddc4e1b4c0
+PUT http://localhost:3003/user/edit/2f81d88d-e9f3-421b-8966-6d415f2e0fbe
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzMjlmODY5LTliOWUtNGFhYy1iNjU5LWE4ZjAwZDYzYTg0NSIsImlhdCI6MTY3NzE5MDY0NywiZXhwIjoxNjc3MTk0MjQ3fQ.-L4hKNtFENpOSYssNXy7jqgg0tgHScR5rE2IHvDsQmg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTA4NywiZXhwIjoxNjc3NDExNDg3fQ.lk-4cxAcar_YsAGreSdSZST3galwPRhXna3QCPvXwoI
 
 {
    "title": "Macarronada com azeitona", 
@@ -45,14 +49,22 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzMjlmODY5LTliOWUt
    "user_id": "52cccfeb-eeae-4901-96c0-99aeedf4f839"
 }
 
-### add friend 
-POST http://localhost:3003/user/friend
+### get recipe by id
+GET http://localhost:3003/recipe/52cccfeb-eeae-4901-96c0-99aeedf4f839
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTA4NywiZXhwIjoxNjc3NDExNDg3fQ.lk-4cxAcar_YsAGreSdSZST3galwPRhXna3QCPvXwoI
+
+### add friend 
+POST http://localhost:3003/user/follow
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzAxODc4MywiZXhwIjoxNjc3MTA1MTgzfQ.Rjyu7slQKBTRatrjYDgV3JjU0HqyJ241F8YRVnG1L0M
 
 {
-    "user_id": "2afbe1e8-c33c-4122-884b-4a9f0c11135b", 
-    "follower_id": "69a3ca5f-55a9-48cd-aeb2-d8764c5161f2"
+    "userToFollowId": "ad2b733a-29da-49c6-b41a-42322bdcd184"
 }
 
-### feed 
-GET http://localhost:3003/user/feed/69a3ca5f-55a9-48cd-aeb2-d8764c5161f2
+### get feed 
+GET http://localhost:3003/user/feed
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTA4NywiZXhwIjoxNjc3NDExNDg3fQ.lk-4cxAcar_YsAGreSdSZST3galwPRhXna3QCPvXwoI
+
+
