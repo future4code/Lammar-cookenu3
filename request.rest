@@ -23,9 +23,9 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTQzNSwiZXhwIjoxNjc3NDExODM1fQ.MJUvTpwaZwBlnPBTT-4Wl1zUxtJAswX5Yyv3e4AKPwA
 
 ### get Data user by id
-GET https://projeto-cookenu.onrender.com/user/2f81d88d-e9f3-421b-8966-6d415f2e0fbe
+GET https://projeto-cookenu.onrender.com/69a3ca5f-55a9-48cd-aeb2-d8764c5161f2
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmODFkODhkLWU5ZjMtNDIxYi04OTY2LTZkNDE1ZjJlMGZiZSIsImlhdCI6MTY3NzMyNTQzNSwiZXhwIjoxNjc3NDExODM1fQ.MJUvTpwaZwBlnPBTT-4Wl1zUxtJAswX5Yyv3e4AKPwA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTNjYTVmLTU1YTktNDhjZC1hZWIyLWQ4NzY0YzUxNjFmMiIsImlhdCI6MTY3NzMzNjg4MSwiZXhwIjoxNjc3NDIzMjgxfQ.sfwQFZmk-ffniHgqU3YQqSGIPwViT5vV1PldJ3MTcHQ
 
 ### create Recipe
 POST https://projeto-cookenu.onrender.com/user/createRecipe
