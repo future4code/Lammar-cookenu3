@@ -16,4 +16,3 @@ userRouter.post("/createRecipe", userController.createRecipe);
 userRouter.post("/friend", userController.addFriend);
 
 userRouter.put("/edit/:id", userController.editRecipe);
-
