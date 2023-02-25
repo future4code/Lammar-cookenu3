@@ -7,7 +7,7 @@ import {
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/user";
 import { VerifyFunctions } from "../function";
-import { recipe } from "../models/types";
+import { recipes } from "../models/types";
 
 const userBusiness = new UserBusiness();
 const authenticator = new Authenticator();
@@ -79,6 +79,27 @@ export class UserController {
         name: user.name,
         email: user.email,
       });
+    } catch (err: any) {
+      res.status(400).send({
+        message: err.message,
+      });
+    }
+  };
+
+  public getRecipeById = async (req: Request, res: Response) => {
+    try {
+      const token = req.headers.authorization as string;
+      const authenticationData = authenticator.getTokenData(token);
+
+      const recipes = await userBusiness.getRecipeById(authenticationData.id);
+
+      res.status(200).send({
+        id: recipes.id,
+        title: recipes.title,
+        description: recipes.description,
+        created_at: recipes.created_at
+      });
+
     } catch (err: any) {
       res.status(400).send({
         message: err.message,

@@ -60,6 +60,15 @@ export class UserDatabase extends Database {
     return result[0];
   };
 
+  public getRecipeById = async (id: string): Promise<recipes> => {
+    const result = await UserDatabase.connection
+      .select("*")
+      .from("Recipes")
+      .where({ id });
+
+    return result[0];
+  };
+
   public addFriend = async (friends: addFriend): Promise<void> => {
     try {
       await Database.connection
